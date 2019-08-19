@@ -1,0 +1,40 @@
+@media only screen and (-webkit-device-pixel-ratio: 2) {
+  .border-1px::before {
+    transform: scaleY(0.5);
+  }
+}
+@media only screen and (-webkit-device-pixel-ratio: 3) {
+  .border-1px::before {
+    transform: scaleY(0.333333);
+  }
+}
+#app {
+  width: 100%;
+  height: 100%;
+}
+#app #headerContainer {
+  width: 100%;
+}
+#app #headerContainer .header {
+  display: flex;
+  width: 100%;
+  padding: 4px 7px;
+  align-items: center;
+}
+#app #headerContainer .header .header_logo {
+  width: 69px;
+}
+#app #headerContainer .header .header_search {
+  width: 242px;
+  height: 28px;
+  margin: 0 4px;
+  border-radius: 2px;
+  background: #ededed;
+}
+#app #headerContainer .header .btn {
+  width: 38px;
+  height: 20px;
+  border-radius: 2px;
+  border: 1px solid #d99295;
+  font-size: 10px;
+}
