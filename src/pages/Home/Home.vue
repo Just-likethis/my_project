@@ -238,8 +238,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Swiper from 'swiper'
-import 'swiper/dist/css/swiper.css'
 import HomeHeader from '../../compoments/HomeHeader/HomeHeader.vue';
 import BScroll from 'better-scroll';
   export default {
