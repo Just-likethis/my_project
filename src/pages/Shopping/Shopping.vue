@@ -114,14 +114,19 @@ px2rem(designpx )
       line-height px2rem(27px)
       color #999
       font-size: .37333rem;
+      margin-top -30px
     .btn
       width px2rem(750px)
       height px2rem(92px)
       line-height px2rem(92px)
       padding 0 px2rem(135px) 0 px2rem(135px)
+      box-sizing border-box
+      margin-top 20px
       div
         background-color: #b4282d;
         width 100%
         height 100%
+        color #fff
+        font-size: .4rem;
 
 </style>

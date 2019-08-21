@@ -238,13 +238,15 @@
 </template>
 
 <script type="text/ecmascript-6">
-import HomeHeader from '../../compoments/HomeHeader/HomeHeader.vue';
-import BScroll from 'better-scroll';
+import HomeHeader from '../../compoments/HomeHeader/HomeHeader.vue'
+import BScroll from 'better-scroll'
   export default {
     components:{
       HomeHeader
     },
     mounted() {
+      this.$store.dispatch('getNavigation')
+      // console.log(state);
       setTimeout(() => {
         /* 
         创建swiper对象的时机?   必须在列表页面显示之后
@@ -262,9 +264,10 @@ import BScroll from 'better-scroll';
             scrollY: true
       })
       const scroll2 = new BScroll('.search-nav',{
-            scrollX: true
+            scrollX: true,
+            click:true
       })
-    },
+    }
   }
 </script>
 

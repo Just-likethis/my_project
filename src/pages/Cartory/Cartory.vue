@@ -1,7 +1,7 @@
 <template>
   <div id="classIfication">
     <div class="m-itemCateListHd">
-      <div class="m-topSearchIpt">
+      <div class="m-topSearchIpt" @click="$router.push('/search')">
         <div class="placeholder">
           <i class="iconfont icon-search1"></i>
           搜索商品，共20222款好物</div>
@@ -10,43 +10,9 @@
     <div class="content">
       <div class="listRouting">
         <ul>
-          <li class="activeLi">
-            <a href="" class="active">推荐专区</a>
+          <li :class="{active:index==ins}" v-for="(item, index) in categoryL1List" :key="index" @click="active(index)">
+            <a :class="{active:index==ins}">{{item.name}}</a>
           </li>
-          <li>
-            <a href="1">夏凉专区</a>
-          </li>
-          <li>
-            <a href="1">爆品专区</a>
-          </li>
-          <li>
-            <a href="1">新品专区</a>
-          </li>
-          <li>
-            <a href="1">居家生活</a>
-          </li>
-          <li>
-            <a href="1">服饰鞋包</a>
-          </li>
-          <li>
-              <a href="1">美食酒水</a>
-          </li>
-          <li>
-              <a href="1">个护清洁</a>
-          </li>
-          <li>
-              <a href="1">母婴亲子</a>
-          </li>
-          <li>
-              <a href="1">运动旅行</a>
-          </li>
-          <li>
-              <a href="1">数码家电</a>
-          </li>
-          <li>
-              <a href="1">全球特色</a>
-          </li>
-          
         </ul>
       </div>
       <div class="listDetails">
@@ -60,11 +26,11 @@
         </div>
         <div class="listDetailsList">
             <ul>
-              <li>
+              <li v-for="(item, index) in categoryL1List" :key="index">
                 <a href="11">
-                  <img src="https://yanxuan.nosdn.127.net/c66f70a639390c0df03abc2c2572f8c0.jpg?imageView&amp;quality=85&amp;thumbnail=144x144">
+                  <img :src="{categoryL1List[0].subCateList[index].name}">
                 </a>
-                <div>清爽美食</div>
+                <div>{{categoryL1List[0].subCateList[index].name}}</div>
               </li>
               <li>
                 <a href="11">
@@ -125,14 +91,32 @@
 
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll' 
-
+import { mapState } from 'vuex'
   export default {
+    data(){
+      return {
+        ins:0
+      }
+    },
     mounted() {
       //滑动scroll
       const scroll = new BScroll('.listRouting',{
+            click:true,
             scrollY: true
+            
+      })
+      this.$store.dispatch('getcategoryL1List')
+    },
+    computed : {
+      ...mapState({
+        categoryL1List : state=>state.categoryL1List.categoryL1List
       })
     },
+    methods:{
+      active(index){
+        this.ins=index
+      }
+    }
   }
 </script>
 
@@ -143,14 +127,15 @@ import BScroll from 'better-scroll'
   #classIfication
     width 100%
     height 100%
+    background-color #fff
     .m-itemCateListHd
       width 100%
       height px2rem(88px)
-      padding px2rem(16px) px2rem(30px)
+      padding px2rem(32px) px2rem(60px)
       box-sizing border-box
       border-bottom px2rem(1px) solid #eee
       .m-topSearchIpt
-        width px2rem(690px)
+        width px2rem(630px)
         height px2rem(56px)
         line-height px2rem(56px)
         background-color #eee
@@ -181,19 +166,22 @@ import BScroll from 'better-scroll'
           top 0px
           width px2rem(162px)  
           height px2rem(1159px)
-          .activeLi
-            border-left px2rem(5px) solid #ab2b2b       
+          // &.activeLi
+          //   border-left px2rem(5px) solid #ab2b2b       
           li
             width  100%
-            height px2rem(50px)
-            line-height px2rem(50px)
+            height px2rem(100px)
+            line-height px2rem(100px)
             font-size px2rem(28px)
             text-align center
             padding-top px2rem(40px)
-            .active
-              color #ab2b2b
-            &:first-child
-              padding-top 0
+            padding-top 0
+            &.active
+              border-left px2rem(5px) solid #ab2b2b   
+            a
+              &.active
+                color #ab2b2b
+          
       .listDetails
         box-sizing border-box
         float left

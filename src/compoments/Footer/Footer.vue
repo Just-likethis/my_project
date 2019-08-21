@@ -58,6 +58,7 @@
     font-size px2rem(24px)
     background-color #fff
     margin-top px2rem(-100px)
+    z-index 99
     li
       display flex
       flex-direction column

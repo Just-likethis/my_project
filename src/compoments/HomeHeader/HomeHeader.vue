@@ -1,40 +1,48 @@
 <template>
-   <div class="header-box">
+  <div class="header-box">
         <div class="search-header">
             <img src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png" alt="">
             <div class="search-box">
                 <i class="iconfont icon-sousuo"></i>
-                <input type="text" placeholder="搜索商品，共21726件好物">
+                <input type="text" placeholder="搜索商品，共21726件好物" @click="$router.push('/search');">
             </div>
             <span class="login-box">登录</span>
         </div>
         <div class="search-nav">
             <ul class="nav-box">
-                <li class="active">
-                    <a href="#">推荐</a>
+                <li :class="{active:index==ins}" v-for="(nav, index) in navigation" :key="index" @click="active(index)">
+                    <a href="#">{{navigation[index].text}}</a>
                 </li>
-                <li>
-                    <a href="#">居家生活</a>
-                </li>
-                <li>
-                    <a href="#">服饰鞋包</a>
-                </li>
-                <li>
-                    <a href="#">美食酒水</a>
-                    </li>
-                    <li>
-                    <a href="#">个人用品</a>
-                    </li>
             </ul> 
-            <div class="down">
-                <i class="iconfont icon-xiajiantou"></i>
+            <div class="down" :class="{active:isShow}"  @click="handelarrow">
+              <i class="iconfont icon-xiajiantou" ></i>
             </div>
         </div>
-   </div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapState } from 'vuex'
   export default {
+    data(){
+      return {
+        isShow : false,
+        ins:0
+      }
+    },
+    methods:{
+      handelarrow(){
+        this.isShow=!this.isShow
+      },
+      active(num){
+        this.ins=num
+      }
+    },
+    computed : {
+      ...mapState({
+        navigation : state=>state.homeHeader.navigation
+      })
+    }
   }
 </script>
 
@@ -96,14 +104,20 @@
       .down
         position absolute
         right 0
-        top 0px
+        top 0px  
         width 50px
         height 30px
         background-color #fff 
         text-align center
         line-height 30px
+        transform rotate(0deg)
+        transition transform 300ms
+        &.active 
+          transform rotateZ(-180deg)
         i 
           font-size 16px
+          text-align center
+          line-height 30px
       .nav-box
         width 1000px
         height px2rem(60px)
